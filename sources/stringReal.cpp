@@ -11,7 +11,7 @@ String::String()
 String::String(const String& rhs) : Data(rhs.Data)
 {}
 
-String::String(const char* data): Data(reinterpret_cast<char*>(data))
+String::String(const char* data): Data(const_cast<char*>(reinterpret_cast<char*>(data)))
 {}
 
 String& String::operator=(const String& rhs)
@@ -23,7 +23,7 @@ String& String::operator=(const String& rhs)
 
 String& String::operator+=(const String& rhs)
 {
- int a1, a2;
+ unsigned int a1, a2;
  a1 = sizeof(this->Data);
  a2 = sizeof(rhs.Data);
  char* newStr;
