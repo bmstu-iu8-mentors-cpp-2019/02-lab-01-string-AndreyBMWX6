@@ -11,7 +11,7 @@ String::String()
 String::String(const String& rhs) : Data(rhs.Data)
 {}
 
-String::String(const char* data): 
+String::String(const char* data):
 Data(const_cast<char*>(data))
 {}
 
