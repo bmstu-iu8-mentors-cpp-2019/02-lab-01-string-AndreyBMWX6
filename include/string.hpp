@@ -110,7 +110,15 @@ class String {
   void swap(String& oth);
 
   friend std::ostream& operator<<(std::ostream&, const String&);
-
+ 
+  friend String operator+(const String& a, const String& b);
+ 
+  friend String operator*(const String& a, unsigned int b);
+ 
+  friend bool operator!=(const String& a, const String& b);
+ 
+  friend bool operator>(const String& a, const String& b);
+   
  private:
   char* Data;
 };
