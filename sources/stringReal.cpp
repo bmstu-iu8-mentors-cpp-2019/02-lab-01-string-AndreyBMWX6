@@ -11,7 +11,8 @@ String::String()
 String::String(const String& rhs) : Data(rhs.Data)
 {}
 
-String::String(const char* data): Data(const_cast<char*>(reinterpret_cast<char*>(data)))
+String::String(const char* data): 
+Data(const_cast<char*>(reinterpret_cast<char*>(data)))
 {}
 
 String& String::operator=(const String& rhs)
