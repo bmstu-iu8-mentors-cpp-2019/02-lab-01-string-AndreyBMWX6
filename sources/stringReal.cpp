@@ -31,7 +31,7 @@ String& String::operator+=(const String& rhs)
  for (unsigned int i = 0; i < sizeof(newStr); i++)
  {
   if (i < a1) newStr[i] = this->Data[i];
-  else 
+  else
    newStr[i] = rhs.Data[i - a1];
  }
  this->Data = newStr;
@@ -61,13 +61,13 @@ bool String::operator==(const String& rhs) const
  if (sizeof(this->Data) != sizeof(rhs.Data))
  {
   return false;
- }
- else
+ } else {
   for (unsigned int i = 0; i < sizeof(this->Data); i++)
   {
    if (this->Data[i] != rhs.Data[i])
     return false;
   }
+ }
  return true;
 }
 
@@ -213,7 +213,7 @@ String operator+(const String& a, const String& b)
  for (unsigned int i = 0; i < sizeof(newStr); i++)
  {
   if (i < a1) newStr[i] = a.Data[i];
-  else 
+  else
    newStr[i] = b.Data[i - a1];
  }
  String str(newStr);
