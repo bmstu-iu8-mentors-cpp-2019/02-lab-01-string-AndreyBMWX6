@@ -339,3 +339,16 @@ bool operator>(const String& a, const String& b)
  else
   return false;
 }
+
+bool operator==(const char* a, const String& b)
+{
+ if (sizeof(b.Data) != sizeof(a))
+  return false;
+ else
+  for (int i = 0; i < sizeof(b.Data); i++)
+  {
+   if (b.Data[i] != a[i])
+    return false;
+  }
+ return true;
+}
