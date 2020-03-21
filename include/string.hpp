@@ -119,7 +119,7 @@ class String {
   friend bool operator!=(const String& a, const String& b);
 
   friend bool operator>(const String& a, const String& b);
-  
+
  private:
   char* Data;
 };
