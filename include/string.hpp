@@ -5,6 +5,7 @@
 
 #include <cstddef>
 #include <iostream>
+#include <utility>
 
 class String {
  public:
@@ -21,7 +22,7 @@ class String {
   /// Пользовательский конструктор
   /// <param name="data">Данные, которые требуется поместить в создаваемый
   /// объект </param>
-  String(const char* data);
+  explicit String(const char* data);
 
   /// Оператор присваивания
   /// <param name="data">Объект, который копируем </param>
@@ -110,15 +111,15 @@ class String {
   void swap(String& oth);
 
   friend std::ostream& operator<<(std::ostream&, const String&);
- 
+
   friend String operator+(const String& a, const String& b);
- 
+
   friend String operator*(const String& a, unsigned int b);
- 
+
   friend bool operator!=(const String& a, const String& b);
- 
+
   friend bool operator>(const String& a, const String& b);
-   
+  
  private:
   char* Data;
 };
