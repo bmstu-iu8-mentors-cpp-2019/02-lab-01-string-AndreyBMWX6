@@ -22,6 +22,23 @@ String& String::operator=(const String& rhs)
  return *this;
 }
 
+String& String::operator+=(const char* rhs)
+{
+ unsigned int a1, a2;
+ a1 = sizeof(this->Data);
+ a2 = sizeof(rhs);
+ char* newStr;
+ newStr = new char[a1 + a2];
+ for (unsigned int i = 0; i < sizeof(newStr); i++)
+ {
+  if (i < a1) newStr[i] = this->Data[i];
+  else
+   newStr[i] = rhs[i - a1];
+ }
+ this->Data = newStr;
+ return *this;
+}
+
 String& String::operator+=(const String& rhs)
 {
  unsigned int a1, a2;
@@ -38,6 +55,7 @@ String& String::operator+=(const String& rhs)
  this->Data = newStr;
  return *this;
 }
+
 
 String& String::operator*=(unsigned int m)
 {
@@ -72,6 +90,21 @@ bool String::operator==(const String& rhs) const
  return true;
 }
 
+bool String::operator==(const char* rhs) const
+{
+ if (sizeof(this->Data) != sizeof(rhs))
+ {
+  return false;
+ } else {
+  for (unsigned int i = 0; i < sizeof(this->Data); i++)
+  {
+   if (this->Data[i] != rhs[i])
+    return false;
+  }
+ }
+ return true;
+}
+
 bool String::operator<(const String& rhs) const
 {
  unsigned int a = sizeof(this->Data);
@@ -97,7 +130,7 @@ bool String::operator<(const String& rhs) const
 
 size_t String::Find(const String& substr) const
 {
- unsigned int a = sizeof(substr);
+ unsigned int a = sizeof(substr.Data);
  char* buff;
  buff = new char[a];
  for (unsigned int i = 0; i < a; i++)
@@ -109,6 +142,37 @@ size_t String::Find(const String& substr) const
   for (unsigned int j = 0; j < a; j++)
   {
    if (substr.Data[i] != buff[i])
+    flag = false;
+  }
+  if (flag)
+   return i;
+  else
+  {
+   for (unsigned int k = 0; k < a - 1; k++)
+   {
+    buff[k] = buff[k + 1];
+   }
+   buff[a - 1] = this->Data[i + a];
+  }
+   i++;
+ }
+ return -1;
+}
+
+size_t String::Find(const char* substr) const
+{
+ unsigned int a = sizeof(substr);
+ char* buff;
+ buff = new char[a];
+ for (unsigned int i = 0; i < a; i++)
+  buff[i] = this->Data[i];
+ unsigned int i = 0;
+ bool flag = true;
+ while (i + a < sizeof(this->Data))
+ {
+  for (unsigned int j = 0; j < a; j++)
+  {
+   if (substr[i] != buff[i])
     flag = false;
   }
   if (flag)
