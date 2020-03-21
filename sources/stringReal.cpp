@@ -346,7 +346,7 @@ bool operator==(const char* a, const String& b)
  {
   return false;
  } else {
-  for (int i = 0; i < sizeof(b.Data); i++)
+  for (unsigned int i = 0; i < sizeof(b.Data); i++)
   {
    if (b.Data[i] != a[i])
     return false;
