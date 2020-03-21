@@ -75,21 +75,6 @@ String& String::operator*=(unsigned int m)
  return *this;
 }
 
-bool String::operator==(const String& rhs) const
-{
- if (sizeof(this->Data) != sizeof(rhs.Data))
- {
-  return false;
- } else {
-  for (unsigned int i = 0; i < sizeof(this->Data); i++)
-  {
-   if (this->Data[i] != rhs.Data[i])
-    return false;
-  }
- }
- return true;
-}
-
 bool String::operator==(const char* rhs) const
 {
  if (sizeof(this->Data) != sizeof(rhs))
@@ -99,6 +84,21 @@ bool String::operator==(const char* rhs) const
   for (unsigned int i = 0; i < sizeof(this->Data); i++)
   {
    if (this->Data[i] != rhs[i])
+    return false;
+  }
+ }
+ return true;
+}
+
+bool String::operator==(const String& rhs) const
+{
+ if (sizeof(this->Data) != sizeof(rhs.Data))
+ {
+  return false;
+ } else {
+  for (unsigned int i = 0; i < sizeof(this->Data); i++)
+  {
+   if (this->Data[i] != rhs.Data[i])
     return false;
   }
  }
