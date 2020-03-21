@@ -34,6 +34,8 @@ class String {
   /// <returns>Возвращаем ссылку на себя</returns>
   String& operator+=(const String& rhs);
 
+  String& operator+=(const char* rhs);
+
   /// Оператор *=
   /// <returns>Возвращаем ссылку на себя</returns>
   String& operator*=(unsigned int m);
@@ -42,6 +44,8 @@ class String {
   /// <param name="rhs">Объект, который стоит после знака '==' </param>
   /// <returns>Возвращаем значения равенства двух строк</returns>
   bool operator==(const String& rhs) const;
+
+  bool operator==(const char* rhs) const;
 
   /// Оператор &lt;
   /// <param name="rhs">Объект, который стоит после знака "&lt;" </param>
@@ -53,6 +57,8 @@ class String {
   /// <returns>Возвращаем позицию substr. Если подстрока не найдена, то
   /// возвратить -1</returns>
   size_t Find(const String& substr) const;
+
+  size_t Find(const char* substr) const;
 
   /// Функция замены символов, заменяет все символы oldSymbol на newSymbol.
   /// <param name="oldSymbol">Символ, который требуется заменить </param>
