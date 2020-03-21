@@ -18,7 +18,7 @@ Data(const_cast<char*>(data))
 String& String::operator=(const String& rhs)
 {
  if (&rhs != this)
-  this->Data = Data;
+  this->Data = rhs.Data;
  return *this;
 }
 
