@@ -126,6 +126,8 @@ class String {
 
   friend bool operator>(const String& a, const String& b);
 
+  friend bool operator==(const char* a, const String& b);
+
  private:
   char* Data;
 };
@@ -161,5 +163,7 @@ bool operator>(const String& a, const String& b);
 /// <param name="str">Строка, которую выводим </param>
 /// <returns>Возвращаем ссылку на поток</returns>
 std::ostream& operator<<(std::ostream& out, const String& str);
+
+bool operator==(const char* a, const String& b);
 
 #endif  // INCLUDE_STRING_HPP_
