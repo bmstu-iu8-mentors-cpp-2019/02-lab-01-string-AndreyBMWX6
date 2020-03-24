@@ -22,16 +22,18 @@ String::String(const String& rhs)
 {
  unsigned int k = size(rhs.Data);
  this->Data = new char[k];
- for (int i = 0; this->Data[i]; i++)
+ for (int i = 0; rhs.Data[i]; i++)
   this->Data[i] = rhs.Data[i];
+ this->Data[k] = '\0';
 }
 
 String::String(const char* data)
 {
  unsigned int k = size(data);
  this->Data = new char[k];
- for (int i = 0; this->Data[i]; i++)
+ for (int i = 0; data[i]; i++)
   this->Data[i] = data[i];
+ this->Data[k] = '\0';
 }
 
 String& String::operator=(const String& rhs)
@@ -40,8 +42,9 @@ String& String::operator=(const String& rhs)
  {
   unsigned int k = size(rhs.Data);
   this->Data = new char[k];
-  for (int i = 0; this->Data[i]; i++)
+  for (int i = 0; rhs.Data[i]; i++)
    this->Data[i] = rhs.Data[i];
+  this->Data[k] = '\0';
  }
  return *this;
 }
