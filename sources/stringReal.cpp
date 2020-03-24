@@ -92,7 +92,7 @@ String& String::operator*=(unsigned int m)
  char* newStr;
  newStr = new char[a*m];
  unsigned int i = 0;
- while (i < m - 1)
+ while (i < m)
  {
   for (unsigned int j = 0; j < a; j++)
   {
@@ -100,6 +100,7 @@ String& String::operator*=(unsigned int m)
   }
   i++;
  }
+ newStr[a * m] = '\0';
  this->Data = newStr;
  return *this;
 }
@@ -321,14 +322,15 @@ String operator*(const String& a, unsigned int b)
  char* newStr;
  newStr = new char[asize * b];
  unsigned int i = 0;
- while (i < b - 1)
+ while (i < b)
  {
   for (unsigned int j = 0; j < asize; j++)
   {
-   newStr[j + i * b] = a[j];
+   newStr[j + i * asize] = a.Data[j];
   }
   i++;
  }
+ newStr[asize * b] = '\0';
  String str(newStr);
  return str;
 }
