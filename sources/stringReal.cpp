@@ -32,7 +32,7 @@ String::String(const String& rhs)
 String::String(const char* data)
 {
  unsigned int k = size(data);
- this->Data = new char[k];
+ this->Data = new char[k+1];
  this->Data[k] = '\0';
  for (int i = 0; data[i]; i++)
   this->Data[i] = data[i];
