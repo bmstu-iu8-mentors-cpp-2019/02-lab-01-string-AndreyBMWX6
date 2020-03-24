@@ -31,7 +31,7 @@ String::String(const char* data)
 {
  unsigned int k = size(data);
  this->Data = new char[k];
- for (int i = 0; i < k; i++)
+ for (int i = 0; i < data[i]; i++)
   this->Data[i] = data[i];
  this->Data[k] = '\0';
 }
