@@ -1,4 +1,4 @@
-// Copyright 2020 Andrey
+// Copyright 2020 Andrey/
 #include <string.hpp>
 
 unsigned int size(const char* data)
