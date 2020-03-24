@@ -310,6 +310,7 @@ String operator+(const String& a, const String& b)
   else
    newStr[i] = b.Data[i - a1];
  }
+ newStr[a1+a2] = '\0';
  String str(newStr);
  return str;
 }
