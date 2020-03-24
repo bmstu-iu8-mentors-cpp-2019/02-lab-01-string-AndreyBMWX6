@@ -266,7 +266,9 @@ void String::RTrim(char symbol)
  char* buff;
  buff = new char[a - k];
  for (unsigned int i = 0; i < index + 1; i++)
+ {
   buff[i] = this->Data[i];
+ }
   buff[a - k] = '\0';
  this->Data = buff;
 }
