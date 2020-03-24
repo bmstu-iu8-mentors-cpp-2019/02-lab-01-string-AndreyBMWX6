@@ -43,7 +43,7 @@ String& String::operator=(const String& rhs)
  if (&rhs != this)
  {
   unsigned int k = size(rhs.Data);
-  this->Data = new char[k];
+  this->Data = new char[k+1];
   for (int i = 0; rhs.Data[i]; i++)
    this->Data[i] = rhs.Data[i];
   this->Data[k] = '\0';
@@ -57,7 +57,7 @@ String& String::operator+=(const char* rhs)
  a1 = this->Size();
  a2 = size(rhs);
  char* newStr;
- newStr = new char[a1 + a2];
+ newStr = new char[a1 + a2 + 1];
  for (unsigned int i = 0; i < a1+a2; i++)
  {
   if (i < a1) newStr[i] = this->Data[i];
@@ -75,7 +75,7 @@ String& String::operator+=(const String& rhs)
  a1 = this->Size();
  a2 = rhs.Size();
  char* newStr;
- newStr = new char[a1 + a2];
+ newStr = new char[a1 + a2 + 1];
  for (unsigned int i = 0; i < a1+a2; i++)
  {
   if (i < a1) newStr[i] = this->Data[i];
@@ -92,7 +92,7 @@ String& String::operator*=(unsigned int m)
 {
  unsigned int a = this->Size();
  char* newStr;
- newStr = new char[a*m];
+ newStr = new char[a * m + 1];
  unsigned int i = 0;
  while (i < m)
  {
@@ -164,7 +164,7 @@ size_t String::Find(const String& substr) const
 {
  unsigned int a = substr.Size();
  char* buff;
- buff = new char[a];
+ buff = new char[a + 1];
  for (unsigned int i = 0; i < a; i++)
   buff[i] = this->Data[i];
  buff[a] = '\0';
@@ -198,7 +198,7 @@ size_t String::Find(const char* substr) const
 {
  unsigned int a = size(substr);
  char* buff;
- buff = new char[a];
+ buff = new char[a + 1];
  for (unsigned int i = 0; i < a; i++)
   buff[i] = this->Data[i];
  buff[a] = '\0';
@@ -272,7 +272,7 @@ void String::RTrim(char symbol)
   index--;
  }
  char* buff;
- buff = new char[a - k];
+ buff = new char[a - k + 1];
  for (unsigned int i = 0; i < index + 1; i++)
  {
   buff[i] = this->Data[i];
@@ -290,7 +290,7 @@ void String::LTrim(char symbol)
   index++;
  }
  char* buff;
- buff = new char[a - index];
+ buff = new char[a - index + 1];
  for (unsigned int i = index; i < a; i++)
   buff[i - index] = this->Data[i];
  buff[a - index] = '\0';
@@ -316,7 +316,7 @@ String operator+(const String& a, const String& b)
  a1 = a.Size();
  a2 = b.Size();
  char* newStr;
- newStr = new char[a1 + a2];
+ newStr = new char[a1 + a2 + 1];
  for (unsigned int i = 0; i < a1+a2; i++)
  {
   if (i < a1) newStr[i] = a.Data[i];
@@ -332,7 +332,7 @@ String operator*(const String& a, unsigned int b)
 {
  unsigned int asize = a.Size();
  char* newStr;
- newStr = new char[asize * b];
+ newStr = new char[asize * b + 1];
  unsigned int i = 0;
  while (i < b)
  {
