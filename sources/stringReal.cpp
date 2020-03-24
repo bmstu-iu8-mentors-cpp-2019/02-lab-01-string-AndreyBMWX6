@@ -56,7 +56,7 @@ String& String::operator+=(const char* rhs)
  a2 = size(rhs);
  char* newStr;
  newStr = new char[a1 + a2];
- for (unsigned int i = 0; i < sizeof(newStr); i++)
+ for (unsigned int i = 0; i < a1+a2; i++)
  {
   if (i < a1) newStr[i] = this->Data[i];
   else
@@ -74,7 +74,7 @@ String& String::operator+=(const String& rhs)
  a2 = rhs.Size();
  char* newStr;
  newStr = new char[a1 + a2];
- for (unsigned int i = 0; i < sizeof(newStr); i++)
+ for (unsigned int i = 0; i < a1+a2; i++)
  {
   if (i < a1) newStr[i] = this->Data[i];
   else
@@ -304,7 +304,7 @@ String operator+(const String& a, const String& b)
  a2 = b.Size();
  char* newStr;
  newStr = new char[a1 + a2];
- for (unsigned int i = 0; i < size(newStr); i++)
+ for (unsigned int i = 0; i < a1+a2; i++)
  {
   if (i < a1) newStr[i] = a.Data[i];
   else
