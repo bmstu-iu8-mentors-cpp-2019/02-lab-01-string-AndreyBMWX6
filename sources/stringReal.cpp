@@ -62,6 +62,7 @@ String& String::operator+=(const char* rhs)
   else
    newStr[i] = rhs[i - a1];
  }
+ newStr[a1+a2] = '\0';
  this->Data = newStr;
  return *this;
 }
@@ -79,6 +80,7 @@ String& String::operator+=(const String& rhs)
   else
    newStr[i] = rhs.Data[i - a1];
  }
+ newStr[a1+a2] = '\0';
  this->Data = newStr;
  return *this;
 }
