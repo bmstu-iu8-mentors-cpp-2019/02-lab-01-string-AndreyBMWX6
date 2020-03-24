@@ -165,13 +165,14 @@ size_t String::Find(const String& substr) const
  buff = new char[a];
  for (unsigned int i = 0; i < a; i++)
   buff[i] = this->Data[i];
+ buff[a] = '\0';
  unsigned int i = 0;
  bool flag = true;
- while (i + a < this->Size())
+ while (i + a <= this->Size())
  {
   for (unsigned int j = 0; j < a; j++)
   {
-   if (substr.Data[i] != buff[i])
+   if (substr.Data[j] != buff[j])
     flag = false;
   }
   if (flag)
@@ -183,6 +184,8 @@ size_t String::Find(const String& substr) const
     buff[k] = buff[k + 1];
    }
    buff[a - 1] = this->Data[i + a];
+   buff[a] = '\0';
+   flag = true;
   }
    i++;
  }
@@ -196,13 +199,14 @@ size_t String::Find(const char* substr) const
  buff = new char[a];
  for (unsigned int i = 0; i < a; i++)
   buff[i] = this->Data[i];
+ buff[a] = '\0';
  unsigned int i = 0;
  bool flag = true;
  while (i + a < this->Size())
  {
   for (unsigned int j = 0; j < a; j++)
   {
-   if (substr[i] != buff[i])
+   if (substr[j] != buff[j])
     flag = false;
   }
   if (flag)
@@ -214,6 +218,8 @@ size_t String::Find(const char* substr) const
     buff[k] = buff[k + 1];
    }
    buff[a - 1] = this->Data[i + a];
+   buff[a] = '\0';
+   flag = true;
   }
    i++;
  }
