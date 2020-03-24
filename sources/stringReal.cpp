@@ -12,7 +12,9 @@ unsigned int size(const char* data)
 }
 
 String::~String()
-{}
+{
+ delete[] Data;
+}
 
 String::String()
 {
@@ -31,7 +33,7 @@ String::String(const char* data)
 {
  unsigned int k = size(data);
  this->Data = new char[k];
- for (int i = 0; i < data[i]; i++)
+ for (int i = 0; data[i]; i++)
   this->Data[i] = data[i];
  this->Data[k] = '\0';
 }
