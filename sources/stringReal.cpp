@@ -1,6 +1,16 @@
 // Copyright 2020 Andrey
 #include <string.hpp>
 
+unsigned int size(const char* data)
+{
+ unsigned int k = 0;
+ for (int i = 0; data[i]; i++)
+ {
+  k++;
+ }
+ return k;
+}
+
 String::~String()
 {}
 
@@ -8,25 +18,39 @@ String::String()
 {
  Data = nullptr;
 }
-String::String(const String& rhs) : Data(rhs.Data)
-{}
+String::String(const String& rhs)
+{
+ unsigned int k = size(rhs.Data);
+ this->Data = new char[k];
+ for (int i = 0; this->Data[i]; i++)
+  this->Data[i] = rhs.Data[i];
+}
 
-String::String(const char* data):
-Data(const_cast<char*>(data))
-{}
+String::String(const char* data)
+{
+ unsigned int k = size(data);
+ this->Data = new char[k];
+ for (int i = 0; this->Data[i]; i++)
+  this->Data[i] = data[i];
+}
 
 String& String::operator=(const String& rhs)
 {
  if (&rhs != this)
-  this->Data = rhs.Data;
+ {
+  unsigned int k = size(rhs.Data);
+  this->Data = new char[k];
+  for (int i = 0; this->Data[i]; i++)
+   this->Data[i] = rhs.Data[i];
+ }
  return *this;
 }
 
 String& String::operator+=(const char* rhs)
 {
  unsigned int a1, a2;
- a1 = sizeof(this->Data);
- a2 = sizeof(rhs);
+ a1 = this->Size();
+ a2 = size(rhs);
  char* newStr;
  newStr = new char[a1 + a2];
  for (unsigned int i = 0; i < sizeof(newStr); i++)
@@ -42,8 +66,8 @@ String& String::operator+=(const char* rhs)
 String& String::operator+=(const String& rhs)
 {
  unsigned int a1, a2;
- a1 = sizeof(this->Data);
- a2 = sizeof(rhs.Data);
+ a1 = this->Size();
+ a2 = rhs.Size();
  char* newStr;
  newStr = new char[a1 + a2];
  for (unsigned int i = 0; i < sizeof(newStr); i++)
@@ -59,13 +83,13 @@ String& String::operator+=(const String& rhs)
 
 String& String::operator*=(unsigned int m)
 {
- int a = sizeof(this->Data);
+ unsigned int a = this->Size();
  char* newStr;
  newStr = new char[a*m];
  unsigned int i = 0;
  while (i < m - 1)
  {
-  for (int j = 0; j < a; j++)
+  for (unsigned int j = 0; j < a; j++)
   {
    newStr[j + i * m] = this->Data[j];
   }
@@ -77,11 +101,11 @@ String& String::operator*=(unsigned int m)
 
 bool String::operator==(const char* rhs) const
 {
- if (sizeof(this->Data) != sizeof(rhs))
+ if (this->Size() != size(rhs))
  {
   return false;
  } else {
-  for (unsigned int i = 0; i < sizeof(this->Data); i++)
+  for (unsigned int i = 0; i < this->Size(); i++)
   {
    if (this->Data[i] != rhs[i])
     return false;
@@ -92,11 +116,11 @@ bool String::operator==(const char* rhs) const
 
 bool String::operator==(const String& rhs) const
 {
- if (sizeof(this->Data) != sizeof(rhs.Data))
+ if (this->Size() != rhs.Size())
  {
   return false;
  } else {
-  for (unsigned int i = 0; i < sizeof(this->Data); i++)
+  for (unsigned int i = 0; i < this->Size(); i++)
   {
    if (this->Data[i] != rhs.Data[i])
     return false;
@@ -107,13 +131,13 @@ bool String::operator==(const String& rhs) const
 
 bool String::operator<(const String& rhs) const
 {
- unsigned int a = sizeof(this->Data);
- int i = 0;
- int min;
- if (a < sizeof(rhs.Data))
+ unsigned int a = this->Size();
+ unsigned int i = 0;
+ unsigned int min;
+ if (a < rhs.Size())
   min = a;
  else
-  min = sizeof(rhs.Data);
+  min = rhs.Size();
  while (i < min)
  {
   if (this->Data[i] < rhs.Data[i])
@@ -122,7 +146,7 @@ bool String::operator<(const String& rhs) const
    return false;
   i++;
  }
- if (sizeof(rhs.Data) > a)
+ if (rhs.Size() > a)
   return true;
  else
   return false;
@@ -130,14 +154,14 @@ bool String::operator<(const String& rhs) const
 
 size_t String::Find(const String& substr) const
 {
- unsigned int a = sizeof(substr.Data);
+ unsigned int a = substr.Size();
  char* buff;
  buff = new char[a];
  for (unsigned int i = 0; i < a; i++)
   buff[i] = this->Data[i];
  unsigned int i = 0;
  bool flag = true;
- while (i + a < sizeof(this->Data))
+ while (i + a < this->Size())
  {
   for (unsigned int j = 0; j < a; j++)
   {
@@ -161,14 +185,14 @@ size_t String::Find(const String& substr) const
 
 size_t String::Find(const char* substr) const
 {
- unsigned int a = sizeof(substr);
+ unsigned int a = size(substr);
  char* buff;
  buff = new char[a];
  for (unsigned int i = 0; i < a; i++)
   buff[i] = this->Data[i];
  unsigned int i = 0;
  bool flag = true;
- while (i + a < sizeof(this->Data))
+ while (i + a < this->Size())
  {
   for (unsigned int j = 0; j < a; j++)
   {
@@ -192,15 +216,15 @@ size_t String::Find(const char* substr) const
 
 void String::Replace(char oldSymbol, char newSymbol)
 {
- for (unsigned int i = 0; i < sizeof(this->Data); i++)
+ for (unsigned int i = 0; i < this->Size(); i++)
   if (this->Data[i] == oldSymbol)
    this->Data[i] = newSymbol;
 }
 
 size_t String::Size() const
 {
- int k = 0;
- for (unsigned int i = 0; i < sizeof(this->Data); i++)
+ unsigned int k = 0;
+ for (int i = 0; this->Data[i]; i++)
  {
   k++;
  }
@@ -226,8 +250,8 @@ char& String::operator[](size_t index)
 
 void String::RTrim(char symbol)
 {
- int a = sizeof(this->Data);
- int k = 0, index = sizeof(this->Data) - 1;
+ unsigned int a = this->Size();
+ unsigned int k = 0, index = this->Size() - 1;
  while (this->Data[index] == symbol)
  {
   k++;
@@ -235,22 +259,22 @@ void String::RTrim(char symbol)
  }
  char* buff;
  buff = new char[a - k];
- for (int i = 0; i < index + 1; i++)
+ for (unsigned int i = 0; i < index + 1; i++)
   buff[i] = this->Data[i];
  this->Data = buff;
 }
 
 void String::LTrim(char symbol)
 {
- int a = sizeof(this->Data);
- int index = 0;
+ unsigned int a = this->Size();
+ unsigned int index = 0;
  while (this->Data[index] == symbol)
  {
   index++;
  }
  char* buff;
  buff = new char[a - index];
- for (int i = index; i < a; i++)
+ for (unsigned int i = index; i < a; i++)
   buff[i] = this->Data[i];
  this->Data = buff;
 }
@@ -271,11 +295,11 @@ std::ostream& operator<<(std::ostream& out, const String& str)
 String operator+(const String& a, const String& b)
 {
  unsigned int a1, a2;
- a1 = sizeof(a.Data);
- a2 = sizeof(b.Data);
+ a1 = a.Size();
+ a2 = b.Size();
  char* newStr;
  newStr = new char[a1 + a2];
- for (unsigned int i = 0; i < sizeof(newStr); i++)
+ for (unsigned int i = 0; i < size(newStr); i++)
  {
   if (i < a1) newStr[i] = a.Data[i];
   else
@@ -287,7 +311,7 @@ String operator+(const String& a, const String& b)
 
 String operator*(const String& a, unsigned int b)
 {
- unsigned int asize = sizeof(a);
+ unsigned int asize = a.Size();
  char* newStr;
  newStr = new char[asize * b];
  unsigned int i = 0;
@@ -305,11 +329,11 @@ String operator*(const String& a, unsigned int b)
 
 bool operator!=(const String& a, const String& b)
 {
- if (sizeof(a) != sizeof(b))
+ if (a.Size() != b.Size())
   return true;
  else
  {
-  for (unsigned int i = 0; i < sizeof(a); i++)
+  for (unsigned int i = 0; i < a.Size(); i++)
    if (a.Data[i] != b.Data[i])
     return true;
   return false;
@@ -318,8 +342,8 @@ bool operator!=(const String& a, const String& b)
 
 bool operator>(const String& a, const String& b)
 {
- unsigned int asize = sizeof(a);
- unsigned int bsize = sizeof(b);
+ unsigned int asize = a.Size();
+ unsigned int bsize = b.Size();
  unsigned int i = 0;
  unsigned int min;
  if (asize < bsize)
@@ -342,11 +366,11 @@ bool operator>(const String& a, const String& b)
 
 bool operator==(const char* a, const String& b)
 {
- if (sizeof(b.Data) != sizeof(a))
+ if (b.Size() != size(a))
  {
   return false;
  } else {
-  for (unsigned int i = 0; i < sizeof(b.Data); i++)
+  for (unsigned int i = 0; i < b.Size(); i++)
   {
    if (b.Data[i] != a[i])
     return false;
