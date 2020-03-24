@@ -216,12 +216,12 @@ bool String::Empty() const
 
 char String::operator[](size_t index) const
 {
- return this->Data[index];
+ return Data[index];
 }
 
 char& String::operator[](size_t index)
 {
- return this->Data[index];
+ return Data[index];
 }
 
 void String::RTrim(char symbol)
