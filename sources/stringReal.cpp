@@ -23,7 +23,7 @@ String::String()
 String::String(const String& rhs)
 {
  unsigned int k = size(rhs.Data);
- this->Data = new char[k];
+ this->Data = new char[k+1];
  for (int i = 0; rhs.Data[i]; i++)
   this->Data[i] = rhs.Data[i];
  this->Data[k] = '\0';
