@@ -33,9 +33,9 @@ String::String(const char* data)
 {
  unsigned int k = size(data);
  this->Data = new char[k];
+ this->Data[k] = '\0';
  for (int i = 0; data[i]; i++)
   this->Data[i] = data[i];
- this->Data[k] = '\0';
 }
 
 String& String::operator=(const String& rhs)
