@@ -65,7 +65,7 @@ String& String::operator+=(const char* rhs)
    newStr[i] = rhs[i - a1];
  }
  newStr[a1+a2] = '\0';
- String str(newStr);
+ String str((newStr));
  *this = str;
  delete[] newStr;
  return *this;
@@ -85,7 +85,7 @@ String& String::operator+=(const String& rhs)
    newStr[i] = rhs.Data[i - a1];
  }
  newStr[a1+a2] = '\0';
- String str(newStr);
+ String str((newStr));
  *this = str;
  delete[] newStr;
  return *this;
@@ -107,7 +107,7 @@ String& String::operator*=(unsigned int m)
   i++;
  }
  newStr[a * m] = '\0';
- String str(newStr);
+ String str((newStr));
  *this = str;
  delete[] newStr;
  return *this;
@@ -288,7 +288,7 @@ void String::RTrim(char symbol)
   buff[i] = this->Data[i];
  }
   buff[a - k] = '\0';
- String str(newStr);
+ String str((newStr));
  *this = str;
  delete[] buff;
 }
@@ -306,7 +306,7 @@ void String::LTrim(char symbol)
  for (unsigned int i = index; i < a; i++)
   buff[i - index] = this->Data[i];
  buff[a - index] = '\0';
- String str(newStr);
+ String str((newStr));
  *this = str;
 delete[] buff;
 }
@@ -338,7 +338,7 @@ String operator+(const String& a, const String& b)
    newStr[i] = b.Data[i - a1];
  }
  newStr[a1+a2] = '\0';
- String str(newStr);
+ String str((newStr));
  delete[] newStr;
  return str;
 }
