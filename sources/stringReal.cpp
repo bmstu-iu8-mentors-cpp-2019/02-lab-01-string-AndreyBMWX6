@@ -1,6 +1,6 @@
 // Copyright 2020 Andrey/
 #include <string.hpp>
-#include <ñstring>
+#include <cstring>
 
 unsigned int size(const char* data)
 {
