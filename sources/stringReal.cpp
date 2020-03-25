@@ -65,7 +65,8 @@ String& String::operator+=(const char* rhs)
    newStr[i] = rhs[i - a1];
  }
  newStr[a1+a2] = '\0';
- this->Data = newStr;
+ String str(newStr);
+ *this = str;
  delete[] newStr;
  return *this;
 }
@@ -84,7 +85,8 @@ String& String::operator+=(const String& rhs)
    newStr[i] = rhs.Data[i - a1];
  }
  newStr[a1+a2] = '\0';
- this->Data = newStr;
+ String str(newStr);
+ *this = str;
  delete[] newStr;
  return *this;
 }
@@ -105,7 +107,8 @@ String& String::operator*=(unsigned int m)
   i++;
  }
  newStr[a * m] = '\0';
- this->Data = newStr;
+ String str(newStr);
+ *this = str;
  delete[] newStr;
  return *this;
 }
@@ -184,9 +187,7 @@ size_t String::Find(const String& substr) const
   {
    delete[] buff;
    return i;
-  }
-  else
-  {
+  } else {
    for (unsigned int k = 0; k < a - 1; k++)
    {
     buff[k] = buff[k + 1];
@@ -222,9 +223,7 @@ size_t String::Find(const char* substr) const
   {
    return i;
    delete[] buff;
-  }
-  else
-  {
+  } else {
    for (unsigned int k = 0; k < a - 1; k++)
    {
     buff[k] = buff[k + 1];
@@ -289,7 +288,8 @@ void String::RTrim(char symbol)
   buff[i] = this->Data[i];
  }
   buff[a - k] = '\0';
- this->Data = buff;
+ String str(newStr);
+ *this = str;
  delete[] buff;
 }
 
@@ -306,7 +306,8 @@ void String::LTrim(char symbol)
  for (unsigned int i = index; i < a; i++)
   buff[i - index] = this->Data[i];
  buff[a - index] = '\0';
- this->Data = buff;
+ String str(newStr);
+ *this = str;
 delete[] buff;
 }
 
@@ -338,7 +339,7 @@ String operator+(const String& a, const String& b)
  }
  newStr[a1+a2] = '\0';
  String str(newStr);
-delete[] newStr;
+ delete[] newStr;
  return str;
 }
 
