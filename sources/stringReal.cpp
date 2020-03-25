@@ -216,8 +216,8 @@ size_t String::Find(const char* substr) const
   }
   if (flag)
   {
-   return i;
    delete[] buff;
+   return i;
   } else {
    for (unsigned int k = 0; k < a - 1; k++)
    {
@@ -229,8 +229,8 @@ size_t String::Find(const char* substr) const
   }
    i++;
  }
- return -1;
  delete[] buff;
+ return -1;
 }
 
 void String::Replace(char oldSymbol, char newSymbol)
