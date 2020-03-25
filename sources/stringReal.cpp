@@ -22,7 +22,7 @@ String::String()
 }
 String::String(const String& rhs)
 {
- unsigned int k = strlen(rhs.Data);
+ unsigned int k = size(rhs.Data);
  this->Data = new char[k+1];
  for (int i = 0; rhs.Data[i]; i++)
   this->Data[i] = rhs.Data[i];
@@ -31,7 +31,7 @@ String::String(const String& rhs)
 
 String::String(const char* data)
 {
- unsigned int k = strlen(data);
+ unsigned int k = size(data);
  this->Data = new char[k+1];
  this->Data[k] = '\0';
  for (int i = 0; data[i]; i++)
