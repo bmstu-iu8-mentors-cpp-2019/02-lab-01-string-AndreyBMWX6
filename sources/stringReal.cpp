@@ -1,5 +1,6 @@
 // Copyright 2020 Andrey/
 #include <string.hpp>
+#include <ñstring>
 
 unsigned int size(const char* data)
 {
@@ -20,33 +21,27 @@ String::String()
 {
  Data = nullptr;
 }
-String::String(const String& rhs)
-{
- unsigned int k = size(rhs.Data);
- this->Data = new char[k+1];
- for (int i = 0; rhs.Data[i]; i++)
-  this->Data[i] = rhs.Data[i];
- this->Data[k] = '\0';
-}
+
+String::String(const String& rhs): String(rhs.Data)
+{}
 
 String::String(const char* data)
 {
- unsigned int k = size(data);
- this->Data = new char[k+1];
- this->Data[k] = '\0';
- for (int i = 0; data[i]; i++)
-  this->Data[i] = data[i];
-}
+ size_t k = size(data);
+ Data = new char[k+1];
+ std::copy(data, data + k, Data);
+ Data[k] = '\0';
+ }
 
 String& String::operator=(const String& rhs)
 {
  if (&rhs != this)
  {
   unsigned int k = size(rhs.Data);
-  this->Data = new char[k+1];
-  for (int i = 0; rhs.Data[i]; i++)
-   this->Data[i] = rhs.Data[i];
-  this->Data[k] = '\0';
+  delete[] Data;
+  Data = new char[k+1];
+  std::copy(rhs.Data, rhs.Data + k, Data);
+  Data[k] = '\0';
  }
  return *this;
 }
