@@ -66,6 +66,7 @@ String& String::operator+=(const char* rhs)
  }
  newStr[a1+a2] = '\0';
  this->Data = newStr;
+ delete[] newStr;
  return *this;
 }
 
@@ -84,6 +85,7 @@ String& String::operator+=(const String& rhs)
  }
  newStr[a1+a2] = '\0';
  this->Data = newStr;
+ delete[] newStr;
  return *this;
 }
 
@@ -104,6 +106,7 @@ String& String::operator*=(unsigned int m)
  }
  newStr[a * m] = '\0';
  this->Data = newStr;
+ delete[] newStr;
  return *this;
 }
 
@@ -178,7 +181,10 @@ size_t String::Find(const String& substr) const
     flag = false;
   }
   if (flag)
+  {
+   delete[] buff;
    return i;
+  }
   else
   {
    for (unsigned int k = 0; k < a - 1; k++)
@@ -191,6 +197,7 @@ size_t String::Find(const String& substr) const
   }
    i++;
  }
+ delete[] buff;
  return -1;
 }
 
@@ -212,7 +219,10 @@ size_t String::Find(const char* substr) const
     flag = false;
   }
   if (flag)
+  {
    return i;
+   delete[] buff;
+  }
   else
   {
    for (unsigned int k = 0; k < a - 1; k++)
@@ -226,6 +236,7 @@ size_t String::Find(const char* substr) const
    i++;
  }
  return -1;
+ delete[] buff;
 }
 
 void String::Replace(char oldSymbol, char newSymbol)
@@ -279,6 +290,7 @@ void String::RTrim(char symbol)
  }
   buff[a - k] = '\0';
  this->Data = buff;
+ delete[] buff;
 }
 
 void String::LTrim(char symbol)
@@ -295,6 +307,7 @@ void String::LTrim(char symbol)
   buff[i - index] = this->Data[i];
  buff[a - index] = '\0';
  this->Data = buff;
+delete[] buff;
 }
 
 void String::swap(String& oth)
@@ -325,6 +338,7 @@ String operator+(const String& a, const String& b)
  }
  newStr[a1+a2] = '\0';
  String str(newStr);
+delete[] newStr;
  return str;
 }
 
@@ -344,6 +358,7 @@ String operator*(const String& a, unsigned int b)
  }
  newStr[asize * b] = '\0';
  String str(newStr);
+ delete[] newStr;
  return str;
 }
 
