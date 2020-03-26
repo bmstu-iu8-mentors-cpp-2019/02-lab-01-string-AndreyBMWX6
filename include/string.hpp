@@ -5,6 +5,7 @@
 
 #include <cstddef>
 #include <iostream>
+#include <utility>
 
 class String {
  public:
@@ -21,7 +22,7 @@ class String {
   /// Пользовательский конструктор
   /// <param name="data">Данные, которые требуется поместить в создаваемый
   /// объект </param>
-  String(const char* data);
+  explicit String(const char* data);
 
   /// Оператор присваивания
   /// <param name="data">Объект, который копируем </param>
@@ -33,6 +34,8 @@ class String {
   /// <returns>Возвращаем ссылку на себя</returns>
   String& operator+=(const String& rhs);
 
+  String& operator+=(const char* rhs);
+
   /// Оператор *=
   /// <returns>Возвращаем ссылку на себя</returns>
   String& operator*=(unsigned int m);
@@ -41,6 +44,8 @@ class String {
   /// <param name="rhs">Объект, который стоит после знака '==' </param>
   /// <returns>Возвращаем значения равенства двух строк</returns>
   bool operator==(const String& rhs) const;
+
+  bool operator==(const char* rhs) const;
 
   /// Оператор &lt;
   /// <param name="rhs">Объект, который стоит после знака "&lt;" </param>
@@ -52,6 +57,8 @@ class String {
   /// <returns>Возвращаем позицию substr. Если подстрока не найдена, то
   /// возвратить -1</returns>
   size_t Find(const String& substr) const;
+
+  size_t Find(const char* substr) const;
 
   /// Функция замены символов, заменяет все символы oldSymbol на newSymbol.
   /// <param name="oldSymbol">Символ, который требуется заменить </param>
@@ -111,6 +118,16 @@ class String {
 
   friend std::ostream& operator<<(std::ostream&, const String&);
 
+  friend String operator+(const String& a, const String& b);
+
+  friend String operator*(const String& a, unsigned int b);
+
+  friend bool operator!=(const String& a, const String& b);
+
+  friend bool operator>(const String& a, const String& b);
+
+  friend bool operator==(const char* a, const String& b);
+
  private:
   char* Data;
 };
@@ -146,5 +163,7 @@ bool operator>(const String& a, const String& b);
 /// <param name="str">Строка, которую выводим </param>
 /// <returns>Возвращаем ссылку на поток</returns>
 std::ostream& operator<<(std::ostream& out, const String& str);
+
+bool operator==(const char* a, const String& b);
 
 #endif  // INCLUDE_STRING_HPP_
