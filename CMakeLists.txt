@@ -27,12 +27,10 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
-# TODO: change template word to project name and delete this comment
 add_library(lab2 STATIC
   ${CMAKE_CURRENT_SOURCE_DIR}/sources/stringReal.cpp
 )
 add_executable(tests
-  # TODO: enum your files and delete this comment
   ${CMAKE_CURRENT_SOURCE_DIR}/tests/string_unittest.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/include/string.hpp
 )
@@ -43,7 +41,7 @@ target_include_directories(lab2
 target_include_directories(tests 
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
-# TODO: change template word to project name and delete this comment
+
 target_link_libraries(tests GTest::main lab2)
 
 enable_testing()
