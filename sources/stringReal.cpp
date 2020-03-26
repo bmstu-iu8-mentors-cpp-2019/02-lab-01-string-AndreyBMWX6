@@ -65,10 +65,7 @@ String& String::operator*=(unsigned int m)
  unsigned int i = 0;
  while (i < m)
  {
-  for (unsigned int j = 0; j < a; j++)
-  {
-   newStr[j + i * m] = this->Data[j];
-  }
+  std::copy(this->Data , this->Data + a, newStr + i * a);
   i++;
  }
  newStr[a * m] = '\0';
