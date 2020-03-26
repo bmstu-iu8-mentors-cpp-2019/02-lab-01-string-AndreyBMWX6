@@ -244,7 +244,6 @@ void String::RTrim(char symbol)
   buff[a - k] = '\0';
  delete[] Data;
  Data = buff;
- 
 }
 
 void String::LTrim(char symbol)
@@ -262,7 +261,6 @@ void String::LTrim(char symbol)
  buff[a - index] = '\0';
  delete[] Data;
  Data = buff;
- 
 }
 
 void String::swap(String& oth)
